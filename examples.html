@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>業界別外注化事例集 - 実践的応用例</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro', 'Yu Gothic Medium', '游ゴシック Medium', YuGothic, '游ゴシック体', 'Noto Sans JP', sans-serif;
+            line-height: 1.7;
+            color: #333;
+            background: #f8fafc;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .nav-breadcrumb {
+            background: white;
+            padding: 1rem 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .breadcrumb {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .breadcrumb a {
+            color: #4facfe;
+            text-decoration: none;
+        }
+        
+        .main-content {
+            padding: 3rem 0;
+        }
+        
+        .industry-nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+        
+        .industry-btn {
+            background: white;
+            border: 2px solid #e2e8f0;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: #4a5568;
+        }
+        
+        .industry-btn.active,
+        .industry-btn:hover {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            color: white;
+            border-color: #4facfe;
+            transform: translateY(-2px);
+        }
+        
+        .case-study-section {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        .case-study-section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .case-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .case-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .case-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+        }
+        
+        .case-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .case-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .case-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .case-subtitle {
+            opacity: 0.9;
+            font-size: 1rem;
+        }
+        
+        .case-body {
+            padding: 2rem;
+        }
+        
+        .case-overview {
+            background: #f7fafc;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid #4facfe;
+        }
+        
+        .overview-title {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #2d3748;
+        }
+        
+        .challenge-solution {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .challenge,
+        .solution {
+            padding: 1.5rem;
+            border-radius: 10px;
+        }
+        
+        .challenge {
+            background: #fed7d7;
+            border-left: 4px solid #e53e3e;
+        }
+        
+        .solution {
+            background: #c6f6d5;
+            border-left: 4px solid #38a169;
+        }
+        
+        .section-title {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #2d3748;
+        }
+        
+        .process-timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .process-timeline::before {
+            content: '';
+            position: absolute;
+            left: 0.5rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #4facfe;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -1.75rem;
+            top: 0.5rem;
+            width: 1rem;
+            height: 1rem;
+            background: #4facfe;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px #4facfe;
+        }
+        
+        .timeline-title {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-desc {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .result-item {
+            text-align: center;
+            padding: 1rem;
+            background: #f7fafc;
+            border-radius: 10px;
+        }
+        
+        .result-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #4facfe;
+            display: block;
+        }
+        
+        .result-label {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+        
+        .tips-section {
+            background: linear-gradient(135deg, #ffeaa7, #fab1a0);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 3rem;
+            color: #2d3748;
+        }
+        
+        .tips-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .tip-item {
+            background: rgba(255,255,255,0.8);
+            padding: 1.5rem;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .tip-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tip-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .case-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .challenge-solution {
+                grid-template-columns: 1fr;
+            }
+            
+            .industry-nav {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h1>🎯 業界別外注化事例集</h1>
+            <p>様々なビジネスモデルへの実践的応用例</p>
+        </div>
+    </div>
+
+    <div class="nav-breadcrumb">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="./index.html">ホーム</a> > 業界別事例集
+            </div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="container">
+            <div class="industry-nav">
+                <button class="industry-btn active" onclick="showIndustry('ecommerce')">🛒 EC・物販</button>
+                <button class="industry-btn" onclick="showIndustry('consulting')">💼 コンサルティング</button>
+                <button class="industry-btn" onclick="showIndustry('content')">📝 コンテンツ制作</button>
+                <button class="industry-btn" onclick="showIndustry('service')">🏪 サービス業</button>
+                <button class="industry-btn" onclick="showIndustry('digital')">💻 デジタル事業</button>
+            </div>
+
+            <!-- EC・物販ビジネス -->
+            <div class="case-study-section active" id="ecommerce">
+                <div class="case-grid">
+                    <div class="case-card">
+                        <div class="case-header">
+                            <span class="case-icon">💻</span>
+                            <h3 class="case-title">パソコン再生販売</h3>
+                            <p class="case-subtitle">月収30-80万円の安定収益</p>
+                        </div>
+                        <div class="case-body">
+                            <div class="case-overview">
+                                <div class="overview-title">事業概要</div>
+                                <p>中古パソコンを仕入れ、クリーニング・整備して販売する事業。完全外注化により作業時間を85%削減し、安定した収益を実現。</p>
+                            </div>
+                            
+                            <div class="challenge-solution">
+                                <div class="challenge">
+                                    <h4 class="section-title">🚨 課題</h4>
+                                    <ul style="list-style: none; padding: 0;">
+                                        <li>• 深夜2時まで作業が続く</li>
+                                        <li>• 体力的・精神的な限界</li>
+                                        <li>• 収益と労働時間が比例</li>
+                                        <li>• 品質のばらつき</li>
+                                    </ul>
+                                </div>
+                                <div class="solution">
+                                    <h4 class="section-title">✅ 解決策</h4>
+                                    <ul style="list-style: none; padding: 0;">
+                                        <li>• 作業の完全標準化</li>
+                                        <li>• 段階的外注化導入</li>
+                                        <li>• 外注倉庫の活用</li>
+                                        <li>• AI品質チェック導入</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="process-timeline">
+                                <div class="timeline-item">
+                                    <div class="timeline-title">第1段階（1-2ヶ月）</div>
+                                    <div class="timeline-desc">外注倉庫導入で物理作業完全自動化</div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-title">完成形（7ヶ月目〜）</div>
+                                    <div class="timeline-desc">AI品質管理で完全自動化達成</div>
+                                </div>
+                            </div>
+
+                            <div class="results-grid">
+                                <div class="result-item">
+                                    <span class="result-value">85%</span>
+                                    <div class="result-label">作業時間削減</div>
+                                </div>
+                                <div class="result-item">
+                                    <span class="result-value">2.3倍</span>
+                                    <div class="result-label">ROI</div>
+                                </div>
+                                <div class="result-item">
+                                    <span class="result-value">30-80万</span>
+                                    <div class="result-label">月収（円）</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="case-card">
+                        <div class="case-header">
+                            <span class="case-icon">👗</span>
+                            <h3 class="case-title">アパレル転売</h3>
+                            <p class="case-subtitle">季節商品の効率的な外注化</p>
+                        </div>
+                        <div class="case-body">
+                            <div class="case-overview">
+                                <div class="overview-title">事業概要</div>
+                                <p>ブランド古着・アパレル商品の買付から販売まで。季節性とトレンドに対応した柔軟な外注システムを構築。</p>
+                            </div>
+                            
+                            <div class="challenge-solution">
+                                <div class="challenge">
+                                    <h4 class="section-title">🚨 課題</h4>
+                                    <ul style="list-style: none; padding: 0;">
+                                        <li>• 季節による作業量の変動</li>
+                                        <li>• 商品知識の属人化</li>
+                                        <li>• 撮影の品質ばらつき</li>
+                                        <li>• 在庫管理の複雑さ</li>
+                                    </ul>
+                                </div>
+                                <div class="solution">
+                                    <h4 class="section-title">✅ 解決策</h4>
+                                    <ul style="list-style: none; padding: 0;">
+                                        <li>• 変動コスト型外注モデル</li>
+                                        <li>• ブランド知識データベース化</li>
+                                        <li>• 撮影ガイドライン標準化</li>
+                                        <li>• AIによる自動分類システム</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="results-grid">
+                                <div class="result-item">
+                                    <span class="result-value">60%</span>
+                                    <div class="result-label">コスト削減</div>
+                                </div>
+                                <div class="result-item">
+                                    <span class="result-value">3倍</span>
+                                    <div class="result-label">処理能力向上</div>
+                                </div>
+                                <div class="result-item">
+                                    <span class="result-value">95%</span>
+                                    <div class="result-label">品質安定性</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- コンサルティングビジネス -->
+            <div class="case-study-section" id="consulting">
+                <div class="case-grid">
+                    <div class="case-card">
+                        <div class="case-header">
+                            <span class="case-icon">📊</span>
+                            <h3 class="case-title">経営コンサルティング</h3>
+                            <p class="case-subtitle">高付加価値業務への集中実現</p>
+                        </div>
+                        <div class="case-body">
+                            <div class="case-overview">
+                                <div class="overview-title">事業概要</div>
+                                <p>中小企業向け経営コンサルティング。資料作成、調査業務を外注化し、戦略立案・クライアント対応に集中。</p>
+                            </div>
+                            
+                            <div class="challenge-solution">
+                                <div class="challenge">
+                                    <h4 class="section-title">🚨 課題</h4>
+                                    <ul style="list-style: none; padding: 0;">
+                                        <li>• 資料作成に時間を取られる</li>
+                                        <li>• 市場調査の工数が膨大</li>
+                                        <li>• クライアント対応時間不足</li>
+                                        <li>• 単価向上の限界</li>
+                                    </ul>
+                                </div>
+                                <div class="solution">
+                                    <h4 class="section-title">✅ 解決策</h4>
+                                    <ul style="list-style: none; padding: 0;">
+                                        <li>• PowerPoint作成の完全外注化</li>
+                                        <li>• 調査専門チームの構築</li>
+                                        <li>• 定型業務のテンプレート化</li>
+                                        <li>• 高付加価値業務へのシフト</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="process-timeline">
+                                <div class="timeline-item">
+                                    <div class="timeline-title">資料作成外注化</div>
+                                    <div class="timeline-desc">PowerPoint、Excel資料の作成を専門チームに委託</div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-title">調査業務外注化</div>
+                                    <div class="timeline-desc">市場調査、競合分析を調査専門会社と連携</div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-title">高付加価値化</div>
+                                    <div class="timeline-desc">戦略立案、経営指導に特化し単価2倍を実現</div>
+                                </div>
+                            </div>
+
+                            <div class="results-grid">
+                                <div class="result-item">
+                                    <span class="result-value">70%</span>
+                                    <div class="result-label">作業時間削減</div>
+                                </div>
+                                <div class="result-item">
+                                    <span class="result-value">2倍</span>
+                                    <div class="result-label">時間単価向上</div>
+                                </div>
+                                <div class="result-item">
+                                    <span class="result-value">150%</span>
+                                    <div class="result-label">売上増加</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="case-card">
+                        <div class="case-header">
+                            <span class="case-icon">💡</span>
+                            <h3 class="case-title">Webマーケティング支援</h3>
+                            <p class="case-subtitle">専門チーム体制での事業拡大</p>
+                        </div>
+                        <div class="case-body">
+                            <div class="case-overview">
+                                <div class="overview-title">事業概要</div>
+                                <p>中小企業のデジタルマーケティング支援。各専門領域を外注化し、同時に10社以上のクライアントを担当。</p>
+                            </div>
+                            
+                            <div class="challenge-solution">
+                                <div class="challenge">
+                                    <h4 class="section-title">🚨 課題</h4>
+                                    <ul style="list-style: none; padding: 0;">
+                                        <li>• 一人では対応クライアント数に限界</li>
+                                        <li>• 専門知識の幅が必要</li>
+                                        <li>• 作業の属人化リスク</li>
+                                        <li>• 品質の一貫性確保</li>
+                                    </ul>
+                                </div>
+                                <div class="solution">
+                                    <h4 class="section-title">✅ 解決策</h4>
+                                    <ul style="list-style: none; padding: 0;">
+                                        <li>• 専門分野別外注チーム構築</li>
+                                        <li>• 品質管理システム導入</li>
+                                        <li>• クライアント対応自動化</li>
+                                        <li>• 成果報告の標準化</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="results-grid">
+                                <div class="result-item">
+                                    <span class="result-value">5倍</span>
+                                    <div class="result-label">対応クライアント数</div>
+                                </div>
+                                <div class="result-item">
+                                    <span class="result-value">300%</span>
+                                    <div class="result-label">売上成長</div>
+                                </div>
+                                <div class="result-item">
+                                    <span class="result-value">90%</span>
+                                    <div class="result-label">クライアント満足度</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- コンテンツ制作 -->
+            <div class="case-study-section" id="content">
+                <div class="case-grid">
+                    <div class="case-card">
+                        <div class="case-header">
+                            <span class="case-icon">🎥</span>
+                            <h3 class="case-title">YouTube チャンネル運営</h3>
+                            <p class="case-subtitle">コンテンツ制作の完全システム化</p>
+                        </div>
+                        <div class="case-body">
+                            <div class="case-overview">
+                                <div class="overview-title">事業概要</div>
+                                <p>教育系YouTubeチャンネル運営。企画以外の全工程を外注化し、週3本の安定投稿を実現。</p>
+                            </div>
+                            
+                            <div class="challenge-solution">
+                                <div class="challenge">
+                                    <h4 class="section-title">🚨 課題</h4>
+                                    <ul style="list-style: none; padding: 0;">
+                                        <li>• 編集作業に1本あたり8時間</li>
+                                        <li>• サムネイル制作の時間不足</li>
+                                        <li>• 継続投稿のプレッシャー</li>
+                                        <li>• 品質の安定性</li>
+                                    </ul>
+                                </div>
+                                <div class="solution">
+                                    <h4 class="section-title">✅ 解決策</h4>
+                                    <ul style="list-style: none; padding: 0;">
+                                        <li>• 編集作業の完全外注化</li>
+                                        <li>• デザイナーとの継続契約</li>
+                                        <li>• 撮影・投稿スケジュール化</li>
+                                        <li>• 品質チェックリスト導入</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="results-grid">
+                                <div class="result-item">
+                                    <span class="result-value">80%</span>
+                                    <div class="result-label">作業時間削減</div>
+                                </div>
+                                <div class="result-item">
+                                    <span class="result-value">3倍</span>
+                                    <div class="result-label">投稿頻度向上</div>
+                                </div>
+                                <div class="result-item">
+                                    <span class="result-value">500%</span>
+                                    <div class="result-label">チャンネル成長</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="case-card">
+                        <div class="case-header">
+                            <span class="case-icon">📝</span>
+                            <h3 class="case-title">ブログメディア運営</h3>
+                            <p class="case-subtitle">記事制作チームの構築</p>
+                        </div>
+                        <div class="case-body">
+                            <div class="case-overview">
+                                <div class="overview-title">事業概要</div>
+                                <p>特化型ブログメディアの運営。ライター、編集者、デザイナーのチーム体制で月100記事投稿を実現。</p>
+                            </div>
+                            
+                            <div class="challenge-solution">
+                                <div class="challenge">
+                                    <h4 class="section-title">🚨 課題</h4>
+                                    <ul style="list-style: none; padding: 0;">
+                                        <li>• 一人では記事作成に限界</li>
+                                        <li>• 専門知識の幅が不足</li>
+                                        <li>• SEO対応の工数</li>
+                                        <li>• 画像素材の調達</li>
+                                    </ul>
+                                </div>
+                                <div class="solution">
+                                    <h4 class="section-title">✅ 解決策</h4>
+                                    <ul style="list-style: none; padding: 0;">
+                                        <li>• 専門分野別ライター採用</li>
+                                        <li>• SEO専門編集者の配置</li>
+                                        <li>• 画像制作チームの構築</li>
+                                        <li>• 品質管理フローの確立</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="results-grid">
+                                <div class="result-item">
+                                    <span class="result-value">10倍</span>
+                                    <div class="result-label">記事作成速度</div>
+                                </div>
+                                <div class="result-item">
+                                    <span class="result-value">400%</span>
+                                    <div class="result-label">PV数増加</div>
+                                </div>
+                                <div class="result-item">
+                                    <span class="result-value">250%</span>
+                                    <div class="result-label">収益向上</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- サービス業 -->
+            <div class="case-study-section" id="service">
+                <div class="case-grid">
+                    <div class="case-card">
+                        <div class="case-header">
+                            <span class="case-icon">🏠</span>
+                            <h3 class="case-title">不動産管理業</h3>
+                            <p class="case-subtitle">管理業務の効率化とサービス品質向上</p>
+                        </div>
+                        <div class="case-body">
+                            <div class="case-overview">
+                                <div class="overview-title">事業概要</div>
+                                <p>賃貸物件管理業務。定期点検、清掃、修繕対応を外注化し、管理物件数を3倍に拡大。</p>
+                            </div>
+                            
+                            <div class="challenge-solution">
+                                <div class="challenge">
+                                    <h4 class="section-title">🚨 課題</h4>
+                                    <ul style="list-style: none; padding: 0;">
+                                        <li>• 物理的な作業で拡張性に限界</li>
+                                        <li>• 緊急対応の属人化</li>
+                                        <li>• 品質のばらつき</li>
+                                        <li>• 管理コストの増大</li>
+                                    </ul>
+                                </div>
+                                <div class="solution">
+                                    <h4 class="section-title">✅ 解決策</h4>
+                                    <ul style="list-style: none; padding: 0;">
+                                        <li>• 地域別パートナー企業との連携</li>
+                                        <li>• 24時間対応コールセンター</li>
+                                        <li>• IoTセンサーによる遠隔監視</li>
+                                        <li>• 作業品質の標準化</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="results-grid">
+                                <div class="result-item">
+                                    <span class="result-value">3倍</span>
+                                    <div class="result-label">管理物件数</div>
+                                </div>
+                                <div class="result-item">
+                                    <span class="result-value">50%</span>
+                                    <div class="result-label">対応時間短縮</div>
+                                </div>
+                                <div class="result-item">
+                                    <span class="result-value">95%</span>
+                                    <div class="result-label">入居者満足度</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- デジタル事業 -->
+            <div class="case-study-section" id="digital">
+                <div class="case-grid">
+                    <div class="case-card">
+                        <div class="case-header">
+                            <span class="case-icon">💻</span>
+                            <h3 class="case-title">SaaS開発・運営</h3>
+                            <p class="case-subtitle">開発・サポート業務の外注化</p>
+                        </div>
+                        <div class="case-body">
+                            <div class="case-overview">
+                                <div class="overview-title">事業概要</div>
+                                <p>中小企業向けSaaSプロダクトの開発・運営。開発、サポート、マーケティングを外注化し、プロダクト戦略に集中。</p>
+                            </div>
+                            
+                            <div class="challenge-solution">
+                                <div class="challenge">
+                                    <h4 class="section-title">🚨 課題</h4>
+                                    <ul style="list-style: none; padding: 0;">
+                                        <li>• 開発工数の制約</li>
+                                        <li>• カスタマーサポート対応</li>
+                                        <li>• マーケティング活動の時間不足</li>
+                                        <li>• 技術的負債の蓄積</li>
+                                    </ul>
+                                </div>
+                                <div class="solution">
+                                    <h4 class="section-title">✅ 解決策</h4>
+                                    <ul style="list-style: none; padding: 0;">
+                                        <li>• オフショア開発チーム構築</li>
+                                        <li>• カスタマーサクセスチーム外注</li>
+                                        <li>• マーケティング専門会社との連携</li>
+                                        <li>• コードレビュー体制の確立</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="results-grid">
+                                <div class="result-item">
+                                    <span class="result-value">200%</span>
+                                    <div class="result-label">開発速度向上</div>
+                                </div>
+                                <div class="result-item">
+                                    <span class="result-value">90%</span>
+                                    <div class="result-label">顧客満足度</div>
+                                </div>
+                                <div class="result-item">
+                                    <span class="result-value">400%</span>
+                                    <div class="result-label">ARR成長</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 成功の秘訣 -->
+            <div class="tips-section">
+                <h2 class="tips-title">🔥 外注化成功の業界共通法則</h2>
+                <div class="tips-grid">
+                    <div class="tip-item">
+                        <span class="tip-icon">🎯</span>
+                        <h4 class="tip-title">明確な目標設定</h4>
+                        <p>外注化の目的と成功指標を具体的に定義し、全員で共有する</p>
+                    </div>
+                    <div class="tip-item">
+                        <span class="tip-icon">📋</span>
+                        <h4 class="tip-title">徹底した標準化</h4>
+                        <p>業務プロセスを詳細にマニュアル化し、品質のばらつきを防ぐ</p>
+                    </div>
+                    <div class="tip-item">
+                        <span class="tip-icon">🤝</span>
+                        <h4 class="tip-title">パートナー関係構築</h4>
+                        <p>外注先を単なる作業者ではなく、事業パートナーとして位置づける</p>
+                    </div>
+                    <div class="tip-item">
+                        <span class="tip-icon">📊</span>
+                        <h4 class="tip-title">継続的な改善</h4>
+                        <p>定期的な振り返りと改善により、システムを進化させ続ける</p>
+                    </div>
+                    <div class="tip-item">
+                        <span class="tip-icon">💡</span>
+                        <h4 class="tip-title">技術活用</h4>
+                        <p>AIやIoTなどの最新技術を積極的に導入し、効率化を推進</p>
+                    </div>
+                    <div class="tip-item">
+                        <span class="tip-icon">🚀</span>
+                        <h4 class="tip-title">段階的拡張</h4>
+                        <p>小さな成功から始めて、徐々に外注化の範囲を拡大していく</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showIndustry(industry) {
+            // 全てのセクションを非表示
+            document.querySelectorAll('.case-study-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // 全てのボタンを非アクティブ
+            document.querySelectorAll('.industry-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // 選択されたセクションを表示
+            document.getElementById(industry).classList.add('active');
+            
+            // 選択されたボタンをアクティブ
+            event.target.classList.add('active');
+        }
+
+        // カードホバー効果
+        document.querySelectorAll('.case-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>クリーニング作業の外注化から開始</div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-title">第2段階（3-4ヶ月）</div>
+                                    <div class="timeline-desc">撮影・出品作業のシステム化</div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-title">第3段階（5-6ヶ月）</div>
+                                    <div class="timeline-desc
